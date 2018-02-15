@@ -10,8 +10,9 @@ import pageObjects.LoginPage;
 public class HomeTest extends AbstractTest {
     HomePage homePageObject;
     LoginPage loginPageObject;
-    String emailAddress = "danielaojeda22@gmail.com";
-    String password = "30132371";
+    String emailAddress = "<set your name>";
+    String password = "<set your password>";
+    String homeTab = "Inicio";
 
     @BeforeClass
     public void setup(){
@@ -25,17 +26,16 @@ public class HomeTest extends AbstractTest {
     public void verifyLoginPage (){
         homePageObject.loginToPage(emailAddress,password);
         String inicioTabText = homePageObject.getInicioTab();
-        Assert.assertTrue(inicioTabText.toLowerCase().contentEquals("inicio"),"es distinto");
-        /*I need to logs out in each test, because each one needs to be atomic*/
-        //homePageObject.clickOnLogOut();
+        Assert.assertTrue(inicioTabText.toLowerCase().contentEquals(homeTab),"is different");
     }
 
-    //@Test(description="Validate you are logged out", priority = 2)
+    @Test(description="Validate you are logged out", priority = 2)
     public void verifyCloseSessionPage (){
-        homePageObject.loginToPage(emailAddress,password);
-        homePageObject.logoutOfPage(emailAddress,password);
-
-        //Assert.assertTrue(inicioTabText.toLowerCase().contentEquals("inicio"),"es distinto");
+        if (homePageObject.getInicioTab()!= this.homeTab) {
+            homePageObject.loginToPage(emailAddress,password);
+        }
+        homePageObject.clickOnLogOut();
+        //Assert.assertTrue(validate user is logged out TBD);
     }
 
     @AfterClass
