@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.List;
 
-import java.util.ArrayList;
+/*This page class will go to the home page after login*/
 
 public class HomePage {
     WebDriver driver;
@@ -33,7 +34,7 @@ public class HomePage {
     private void clickButton (){
         WebElement btnElement = driver.findElement(By.cssSelector("button[type='submit']"));
         btnElement.click();
-        /*deberia ir un wait, este no se por que no anda, pero para q terminen de cargar la pagina despues del click*/
+        /*Here is needed a wait.Working on that*/
         //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div._5k")));
     }
 
@@ -44,32 +45,32 @@ public class HomePage {
         clickButton();
     }
 
-    /*Obtain the text of Inicio tab, shown after user log in Pinterest*/
+    /*Obtain the text of Inicio tab webElement, shown after user log in Pinterest*/
     public String getInicioTab (){
         WebElement inicioTabTextElement = driver.findElement(By.cssSelector("div._5k"));
         return (inicioTabTextElement.getText());
     }
 
+    /*Click on the settings dropdown menu*/
     private void clickOnSettings (){
         WebElement settingsElement = driver.findElement(By.cssSelector("div._0:nth-child(7) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)"));
         settingsElement.click();
+        /*Here is needed a wait.Working on that*/
         //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div._0[role=listitem]")));
 
     }
 
+    /*Logs out*/
     public void clickOnLogOut (){
+        WebElement childFound;
+        childFound = null ; /*you need to inicialize the webelement*/
         this.clickOnSettings();
-        WebElement logOutMainElement = driver.findElement(By.cssSelector("div._0[role=listitem]"));
-        //System.out.println(logOutElement);
-        WebElement logOutElement = logOutMainElement.findElement(By.className("div._0._3j._2n"));
-    }
-
-    /*Login and then logs out*/
-    public void logoutOfPage (String emailAddress, String password){
-        this.loginToPage(emailAddress,password);
-        this.clickOnLogOut();
-        /*deberia ir un wait, este no se por que no anda, pero para q termien de cargar la pagina despues de salir*/
-        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div._5k")));
+        /*Work in Progress:*/
+        List<WebElement> dropDownElements = driver.findElements(By.cssSelector("div._0[role=listitem]"));
+        for (WebElement dropDownElement : dropDownElements){
+            childFound = dropDownElement.findElement(By.cssSelector("div._0._3j._2n"));
+        }
+        childFound.click();
     }
 
 }

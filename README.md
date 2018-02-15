@@ -1,4 +1,9 @@
 # firstPracticeWithSelenium
 
-First Automation project using Selenium, TestNG and Maven. It was done using the Pinterest Website, and using the Page Object Model.
+First Automation project using InteliJ(as IDE), Selenium, TestNG and Maven. It was done using the Pinterest Website, and using the Page Object Pattern.
+
+We will need to have TestNG and Maven installed, to be able to run this project using them, or you could choose one of them.
+
+
+
 

@@ -19,7 +19,7 @@ public class LoginTest  extends AbstractTest{
     @Test(description="Validate you are on the Login Page",priority = 1)
     public void verifyLoginButton (){
         String loginButton = loginPageObject.getLoginButton();
-        Assert.assertTrue(loginButton.toLowerCase().contentEquals("log in"),"es distinto");
+        Assert.assertTrue(loginButton.toLowerCase().contentEquals("log in"),"is different");
     }
 
     @AfterClass
