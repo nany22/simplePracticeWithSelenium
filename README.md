@@ -1,0 +1,2 @@
+# firstPracticeWithSelenium
+Selenium TestNG Maven
