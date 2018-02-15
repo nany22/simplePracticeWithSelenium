@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Pinterest">
+  <parameter name = "selenium.browser" value="chrome"/>
+  <parameter name = "selenium.url" value="https://ar.pinterest.com/"/>
+  <test name="verify Login Button">
+    <classes>
+      <class name="testObjects.LoginTest"/>
+    </classes>
+  </test>
+</suite>
