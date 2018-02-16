@@ -2,9 +2,10 @@
 <suite name="Pinterest">
   <parameter name = "selenium.browser" value="chrome"/>
   <parameter name = "selenium.url" value="https://ar.pinterest.com/"/>
-  <test name="verify Login Button">
+  <test name="Pinterest tests">
     <classes>
       <class name="testObjects.LoginTest"/>
+      <class name="testObjects.HomeTest"/>
     </classes>
   </test>
 </suite>
