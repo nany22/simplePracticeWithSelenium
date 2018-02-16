@@ -16,10 +16,10 @@ public class LoginPage {
         this.driver = driver;
     }
 
-        /*obtain the text of Log in button when you access to the Pinterest url*/
-        public String getLoginButton (){
-            loginButtonTextElement = driver.findElement(By.cssSelector("button.lightGrey"));
-            return (loginButtonTextElement.getText());
-        }
+    /*obtain the text of Log in button when you access to the Pinterest url*/
+    public String getLoginButton (){
+       loginButtonTextElement = driver.findElement(By.cssSelector("button.lightGrey"));
+       return (loginButtonTextElement.getText());
+    }
 
 }

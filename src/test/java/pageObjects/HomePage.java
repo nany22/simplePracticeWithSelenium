@@ -62,15 +62,11 @@ public class HomePage {
 
     /*Logs out*/
     public void clickOnLogOut (){
-        WebElement childFound;
-        childFound = null ; /*you need to inicialize the webelement*/
         this.clickOnSettings();
         /*Work in Progress:*/
         List<WebElement> dropDownElements = driver.findElements(By.cssSelector("div._0[role=listitem]"));
-        for (WebElement dropDownElement : dropDownElements){
-            childFound = dropDownElement.findElement(By.cssSelector("div._0._3j._2n"));
-        }
-        childFound.click();
+        /* We depend on list order because pintrest has for dropdown menu,5 elements with only class as value and they are the same.Logout is the 5th element*/
+        dropDownElements.get(dropDownElements.size() - 1).findElement(By.cssSelector("div._0._3j._2n")).click();
     }
 
 }
