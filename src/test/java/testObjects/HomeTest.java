@@ -10,9 +10,9 @@ import pageObjects.LoginPage;
 public class HomeTest extends AbstractTest {
     HomePage homePageObject;
     LoginPage loginPageObject;
-    String emailAddress = "<set your name>";
+    String emailAddress = "<set your email>";
     String password = "<set your password>";
-    String homeTab = "Inicio";
+    String homeTab = "inicio";
 
     @BeforeClass
     public void setup(){
@@ -26,16 +26,15 @@ public class HomeTest extends AbstractTest {
     public void verifyLoginPage (){
         homePageObject.loginToPage(emailAddress,password);
         String inicioTabText = homePageObject.getInicioTab();
-        Assert.assertTrue(inicioTabText.toLowerCase().contentEquals(homeTab),"is different");
+        Assert.assertTrue(inicioTabText.toLowerCase().contentEquals(homeTab),"does not match");
+        homePageObject.clickOnLogOut();
     }
 
     @Test(description="Validate you are logged out", priority = 2)
     public void verifyCloseSessionPage (){
-        if (homePageObject.getInicioTab()!= this.homeTab) {
-            homePageObject.loginToPage(emailAddress,password);
-        }
+        homePageObject.loginToPage(emailAddress,password);
         homePageObject.clickOnLogOut();
-        //Assert.assertTrue(validate user is logged out TBD);
+        Assert.assertTrue(/*validate user is logged out TBD*/true);
     }
 
     @AfterClass
