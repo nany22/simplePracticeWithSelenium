@@ -24,7 +24,7 @@ public class HomeTest extends AbstractTest {
 
     @Test(description="Validate you are logged in",priority = 1)
     public void verifyLoginPage (){
-        homePageObject.loginToPage(emailAddress,password);
+        loginPageObject.loginToPage(emailAddress,password);
         String inicioTabText = homePageObject.getInicioTab();
         Assert.assertTrue(inicioTabText.toLowerCase().contentEquals(homeTab),"does not match");
         homePageObject.clickOnLogOut();
@@ -32,10 +32,12 @@ public class HomeTest extends AbstractTest {
 
     @Test(description="Validate you are logged out", priority = 2)
     public void verifyCloseSessionPage (){
-        homePageObject.loginToPage(emailAddress,password);
+        loginPageObject.loginToPage(emailAddress,password);
         homePageObject.clickOnLogOut();
-        Assert.assertTrue(/*validate user is logged out TBD*/true);
-    }
+        String inicioTabText = homePageObject.getInicioTab();
+        //"inicioTabText" will doesn't match with the string "Inicio" after logs out, it will have the string "Continue as a business"
+        Assert.assertFalse(inicioTabText.toLowerCase().contentEquals(homeTab),"does match");
+        }
 
     @AfterClass
     public void tearDown(){
