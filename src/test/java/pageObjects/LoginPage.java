@@ -3,34 +3,50 @@ package pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-/*This page class will go to the login page only, without log in*/
 
-public class LoginPage {
-        WebDriver driver;
+
+/*This page class will go to the login page only, without log in. Pages are the only one using Selenium driver directly*/
+
+public class LoginPage extends PageObject {
+        String url = "https://ar.pinterest.com/";
+
+        @FindBy(css = "input#email")
         WebElement emailAddressElement;
+
+        @FindBy(id = "password")
         WebElement passwordElement;
+
+        @FindBy(css ="button[type='submit']")
+        WebElement btnElement;
+
+
+        @FindBy(css ="button.lightGrey")
         WebElement loginButtonTextElement;
 
-    /*Constructor,used to be able to then send the driver used in testClass,to this class to continue using the same driver and not another new */
-    /*this is used to refers to the driver object declared in that class*/
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
+
+    public LoginPage(WebDriver driver){
+        super(driver);
+    }
+
+    public void goToURL(){
+        this.driver.get(this.url);
     }
 
     private void setEmailAddress (String emailAddress){
-        emailAddressElement = driver.findElement(By.cssSelector("input#email"));
-        emailAddressElement.sendKeys(emailAddress);
+        //emailAddressElement = driver.findElement(By.cssSelector("input#email"));
+        this.emailAddressElement.sendKeys(emailAddress);
     }
 
     private void setPassword (String password){
-        passwordElement = driver.findElement(By.id("password"));
-        passwordElement.sendKeys(password);
+        //passwordElement = driver.findElement(By.id("password"));
+        this.passwordElement.sendKeys(password);
     }
 
     private void clickButton (){
-        WebElement btnElement = driver.findElement(By.cssSelector("button[type='submit']"));
-        btnElement.click();
+        //btnElement = driver.findElement(By.cssSelector("button[type='submit']"));
+        this.btnElement.click();
         /*Here is needed a wait.Working on that*/
         //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div._5k")));
     }
@@ -44,8 +60,8 @@ public class LoginPage {
 
     /*obtain the text of Log in button when you access to the Pinterest url*/
     public String getLoginButton (){
-       loginButtonTextElement = driver.findElement(By.cssSelector("button.lightGrey"));
-       return (loginButtonTextElement.getText());
+       //WebElement loginButtonTextElement = driver.findElement(By.cssSelector("button.lightGrey"));
+       return (this.loginButtonTextElement.getText());
     }
 
 }
