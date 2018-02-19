@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
 
-public class HomeTest extends AbstractTest {
+public class HomeTest extends TestObject {
     HomePage homePageObject;
     LoginPage loginPageObject;
     String emailAddress = "<set your email>";
@@ -17,9 +17,9 @@ public class HomeTest extends AbstractTest {
     @BeforeClass
     public void setup(){
         super.setup();
-        this.driver.get(url);
         this.loginPageObject = new LoginPage(driver);
         this.homePageObject = new HomePage(driver);
+        this.loginPageObject.goToURL();
     }
 
     @Test(description="Validate you are logged in",priority = 1)
@@ -38,10 +38,5 @@ public class HomeTest extends AbstractTest {
         //"inicioTabText" will doesn't match with the string "Inicio" after logs out, it will have the string "Continue as a business"
         Assert.assertFalse(inicioTabText.toLowerCase().contentEquals(homeTab),"does match");
         }
-
-    @AfterClass
-    public void tearDown(){
-        super.tearDown();
-    }
 
 }
