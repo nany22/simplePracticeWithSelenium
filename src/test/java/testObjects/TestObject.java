@@ -2,37 +2,47 @@ package testObjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-/*Additional functionalTest super Class to hold all the driver lifecycle management code*/
+/**
+ * This is an Additional functionalTest super Class to hold all the driver lifecycle management code
+ * <p>
+ * <b>BeforeMethod</b> will be run before each test to make them atomic
+ * For more information read <a href="http://testng.org/doc/documentation-main.html#annotations">JavaDoc</a>
+ * <b>AfterMethod</b> will be run after each test to make them atomic
+ *
+ * <b>driver</b> use "protected" modifier, the driver can be accessed by subclasses
+ * <b>driver</b> use "static" modifier, the driver is common to all instances (or objects) of the class because i is a class level variable
+ * only a single copy of static variable is created and shared among all the instances of the class.
+ */
+
 public class TestObject {
-    /*using protected modifier, the driver can be accessed by subclasses*/
-    /*using static modifier, the driver is common to all instances (or objects) of the class because i is a class level variable
-     *only a single copy of static variable is created and shared among all the instances of the class.
-     */
     protected static WebDriver driver;
 
-    @BeforeTest
+    /**
+    * Browser will be opened each time for each test
+    */
+    @BeforeMethod
     public void setup() {
-        /*Before each test, the browser will be opened and driver is instantiated*/
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Dany\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         this.driver = new ChromeDriver();
     }
 
-    /*Its not working, looks like the object is null when call to this method*/
-    @AfterTest
+    /**
+    * Cookies will be deleted because it is needed user logs out for each tests to be atomic
+    * So user is logged out via cookies deleted.
+    */
+    @AfterMethod
     public void cleanUp(){
         this.driver.manage().deleteAllCookies();
     }
 
-    /*quit instead of close because that leaves open the browser process*/
-    @AfterTest
+    /**
+    * Browser will be closed for each test("quit" is used instead of "close" because that leaves open the browser process)
+    */
+    @AfterMethod
     public void tearDown() {
         this.driver.quit();
     }
-
 }
