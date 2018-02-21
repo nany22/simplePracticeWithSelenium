@@ -19,8 +19,8 @@ import utils.Navigation;
  */
 
 public class HomeTest extends TestObject {
-    String emailAddress = "danielaojeda22@gmail.com";
-    String password = "30132371";
+    String emailAddress = "<set your email>";
+    String password = "<set your password>";
     String homeTab = "continue as a business";
 
     /**
